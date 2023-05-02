@@ -5,12 +5,12 @@ metadata:
 spec:
   containers:
   - name: kubectl
-    image: joshendriks/alpine-k8s
+    image: alpine/k8s:1.27.1
     command:
     - /bin/cat
     tty: true    
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
+    image: gcr.io/kaniko-project/executor:1.9.2
     command:
     - /busybox/cat
     tty: true
@@ -20,7 +20,7 @@ spec:
   volumes:
     - name: kaniko-secret
       secret:
-        secretName: regcred
+        secretName: docker-regcred
         items:
           - key: .dockerconfigjson
             path: config.json
